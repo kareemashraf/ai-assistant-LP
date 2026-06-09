@@ -1,986 +1,492 @@
-<!doctype html>
-<html lang="en">
-<head>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title>AI Browsing Assistant.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <meta name="description" content="AI Browsing Assistant — Intelligent Browsing for Students, researchers..etc."/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Intelligent Browsing Assistant</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#d8b9ff",
+                        "primary-container": "#00f0ff",
+                        "on-secondary-fixed-variant": "#6200bc",
+                        "on-tertiary-fixed": "#171838",
+                        "secondary": "#d8b9ff",
+                        "primary-fixed": "#7df4ff",
+                        "deep-indigo": "#0B0C1A",
+                        "on-primary-container": "#006970",
+                        "secondary-container": "#6e06d0",
+                        "inverse-primary": "#006970",
+                        "error": "#ffb4ab",
+                        "cyber-cyan": "#00F0FF",
+                        "outline": "#849495",
+                        "on-primary-fixed": "#002022",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#eddcff",
+                        "on-background": "#e0e3e5",
+                        "surface": "#101415",
+                        "on-secondary-fixed": "#290055",
+                        "on-tertiary-container": "#5b5c7f",
+                        "on-secondary-container": "#d5b5ff",
+                        "on-surface": "#e0e3e5",
+                        "on-secondary": "#450086",
+                        "surface-container-highest": "#323537",
+                        "on-primary-fixed-variant": "#004f54",
+                        "surface-container-high": "#272a2c",
+                        "on-tertiary-fixed-variant": "#434466",
+                        "glass-border": "rgba(255, 255, 255, 0.12)",
+                        "tertiary-container": "#d7d6ff",
+                        "primary-fixed-dim": "#00dbe9",
+                        "tertiary": "#f8f4ff",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface-container-lowest": "#0b0f10",
+                        "surface-dim": "#101415",
+                        "on-surface-variant": "#b9cacb",
+                        "surface-tint": "#00dbe9",
+                        "electric-purple": "#BF40FF",
+                        "on-primary": "#00363a",
+                        "surface-container-low": "#191c1e",
+                        "on-error-container": "#ffdad6",
+                        "background": "#101415",
+                        "primary": "#dbfcff",
+                        "surface-variant": "#323537",
+                        "on-tertiary": "#2c2d4e",
+                        "surface-container": "#1d2022",
+                        "glass-surface": "rgba(255, 255, 255, 0.05)",
+                        "inverse-on-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#c3c3ec",
+                        "on-error": "#690005",
+                        "surface-bright": "#363a3b",
+                        "inverse-surface": "#e0e3e5",
+                        "outline-variant": "#3b494b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "section-gap": "120px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-hero": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-mono": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display-hero": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --bg: #07060a;
-            --card-bg: #0f1117;
-            --text: #eaf0ff;
-            --muted: #9aa3bd;
-            --accent1: #6ee7f5;
-            --accent2: #9b7fff;
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --glow: 0 8px 30px rgba(107, 114, 128, 0.5);
-            --max-width: 1200px;
-            --radius: 14px;
-            --bg-gradient: radial-gradient(1200px 600px at 10% 10%, rgba(75, 85, 99, 0.06), transparent), radial-gradient(900px 500px at 95% 90%, rgba(155, 127, 255, 0.04), transparent);
-            --primary-btn-text: #071023;
-            color-scheme: dark;
-        }
-
-        html.light-mode {
-            --bg: #f0f4f9;
-            --card-bg: #ffffff;
-            --text: #1c2026;
-            --muted: #5f6c80;
-            --accent1: #0095ad;
-            --accent2: #7a5fff;
-            --glass-bg: rgba(0, 0, 0, 0.03);
-            --border-color: rgba(0, 0, 0, 0.08);
-            --glow: 0 8px 30px rgba(107, 114, 128, 0.2);
-            --bg-gradient: radial-gradient(1200px 600px at 10% 10%, rgba(155, 127, 255, 0.04), transparent), radial-gradient(900px 500px at 95% 90%, rgba(75, 85, 99, 0.06), transparent);
-            --primary-btn-text: #ffffff;
-            color-scheme: light;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
+        body {
+            background-color: #0B0C1A; /* deep-indigo */
+            color: #e0e3e5;
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background-color: var(--bg);
-            background-image: var(--bg-gradient);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .wrap {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 40px 24px;
+        .glass-card:hover {
+            border-color: #00F0FF;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            transform: translateY(-4px);
         }
 
-        /* Hero */
-        .hero {
-            height: 100%;
-            position: relative;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 16px 120px;
-            overflow: hidden;
+        .cyan-glow {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
         }
 
-        .parallax-layer {
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 1;
+        .parallax-bg {
+            transition: transform 0.1s linear;
         }
 
-        .parallax-layer .layer-inner {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .bg-grid {
-            width: 160%;
-            height: 160%;
-            background-image: linear-gradient(transparent 49%, var(--glass-bg) 50%), linear-gradient(90deg, transparent 49%, var(--glass-bg) 50%);
-            background-size: 120px 120px;
-            filter: blur(40px) saturate(140%);
-            opacity: 0.5;
-            transform: translate3d(0, 0, 0) scale(1.1);
-        }
-
-        .bg-orb {
-            width: 900px;
-            height: 900px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 30%, rgba(110, 231, 245, 0.18), rgba(155, 127, 255, 0.06) 30%, rgba(11, 12, 20, 0) 60%);
-            filter: blur(40px);
-        }
-
-        .bg-circuit {
-            width: 1400px;
-            height: 400px;
-            background-image: radial-gradient(closest-side, var(--glass-bg), transparent 60%);
-            transform: translate3d(0, 40%, 0) rotate(-6deg);
-            opacity: 0.9;
-            mix-blend-mode: overlay;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 6;
-            display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 32px;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        @media (max-width: 900px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        .title {
-            font-weight: 800;
-            font-size: 3.1rem;
-            line-height: 1.02;
-            margin: 0 0 14px;
-            background: linear-gradient(90deg, var(--accent1), var(--accent2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .subtitle {
-            margin: 0 0 18px;
-            color: var(--muted);
-            font-weight: 500;
-        }
-
-        .tagline {
-            margin: 0 0 26px;
-            color: var(--muted);
-            max-width: 70%;
-        }
-
-        @media (max-width: 900px) {
-            .tagline {
-                max-width: 100%;
-            }
-        }
-
-        /* Buttons */
-        .cta-row {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        @media (max-width: 900px) {
-            .cta-row {
-                justify-content: center;
-            }
-        }
-
-        .btn {
-            -webkit-appearance: none;
-            border: 0;
-            cursor: pointer;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent1), var(--accent2));
-            color: var(--primary-btn-text);
-            box-shadow: 0 6px 28px rgba(155, 127, 255, 0.18), 0 2px 10px rgba(110, 231, 245, 0.06);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--muted);
-        }
-
-        .btn-ghost:hover {
-            background: var(--glass-bg);
-            color: var(--text);
-            border-color: var(--accent1);
-        }
-
-        #theme-toggle {
-            padding: 14px;
-        }
-
-        /* Cards & Sections */
-        .card-right {
-            background: linear-gradient(180deg, var(--glass-bg), transparent);
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: var(--glow);
-            backdrop-filter: blur(6px);
-        }
-
-        section {
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-            color: var(--accent1);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Setup Section assets/Gemini.png */
-        #setup {
-            background-image: url("https://wallpaperbat.com/img/8762903-wallpaper-for-desktop-laptop-md65.jpg");
-            background-size: cover;
-            background-position: center;
-            /* Darken the image */
-            background-color: rgba(0, 0, 0, 0.6); /* adjust darkness */
-            background-blend-mode: darken;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            overflow: hidden;
-        }
-
-        .setup-bg-shape {
-            position: absolute;
-            top: 10%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(110, 231, 245, 0.05), transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
-            margin-top: 32px;
-            justify-items: center;
-        }
-
-        .step-card {
-            background: rgba(15, 17, 23, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s;
-            max-width: 600px;
-            width: 100%;
-        }
-
-        html.light-mode .step-card {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        .step-card:hover {
-            border-color: var(--accent1);
-            transform: translateY(-5px);
-        }
-
-        .step-num {
-            position: absolute;
-            top: -15px;
-            right: 10px;
-            font-size: 5rem;
-            font-weight: 900;
-            color: var(--glass-bg);
-            line-height: 1;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .screenshot-placeholder {
-            width: 100%;
-            aspect-ratio: 16/10;
-            background: #13161c;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        html.light-mode .screenshot-placeholder {
-            background: #e1e5ea;
-        }
-
-        .screenshot-placeholder svg {
-            opacity: 0.3;
-        }
-
-        /* Features, Who, Tech Sections */
-        .features, .who-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .features {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .who-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        @media (max-width: 980px) {
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 680px) {
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 1100px) {
-            .who-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .who-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .feature-card, .who-box {
-            background: linear-gradient(180deg, var(--glass-bg), transparent);
-            padding: 18px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .feature-card h3, .who-box h4 {
-            margin: 0 0 8px;
-            font-size: 1.05rem;
-        }
-
-        /* CTA Footer */
-        .cta-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 28px;
-            border-radius: 12px;
-            background: var(--glass-bg);
-            box-shadow: var(--glow);
-            border: 1px solid var(--border-color);
-        }
-
-        @media (max-width: 800px) {
-            .cta-footer {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-        }
-
-        /* Utilities */
-        .reveal {
+        .fade-up {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 800ms cubic-bezier(.2, .9, .25, 1);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        .reveal.visible {
+        .fade-up.visible {
             opacity: 1;
-            transform: none;
-        }
-
-        footer {
-            padding: 40px 0;
-            color: var(--muted);
-            text-align: center;
-            font-size: 13px;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: linear-gradient(90deg, var(--accent1), var(--accent2));
-        }
-
-        /* Back To Top & Theme Toggle Icons */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 48px;
-            height: 48px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            pointer-events: all;
             transform: translateY(0);
         }
 
-        .back-to-top:hover {
-            background: var(--accent2);
-            border-color: var(--accent2);
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(155, 127, 255, 0.3);
+        .sparkle-pulse {
+            animation: pulse 2s infinite ease-in-out;
         }
 
-        html.light-mode .back-to-top:hover {
-            color: #fff;
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Top Navigation Styles */
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 24px; /* Reduced padding */
-            position: sticky;
-            top: 0;
-            background-color: var(--bg);
-            z-index: 10;
-            border-bottom: 1px solid var(--border-color);
+        .floating-element {
+            animation: float 6s infinite ease-in-out;
         }
 
-        .top-nav .logo-link {
-            text-decoration: none;
+        @media (max-width: 768px) {
+            .display-hero-resp { font-size: clamp(36px, 10vw, 50px) !important; }
+            .headline-lg-resp { font-size: clamp(26px, 7vw, 32px) !important; }
+            .headline-md-resp { font-size: clamp(18px, 5vw, 22px) !important; }
+            .body-lg-resp { font-size: clamp(15px, 4.5vw, 17px) !important; }
+            .section-gap-resp { padding-top: 60px !important; padding-bottom: 60px !important; }
+            .space-y-resp > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(64px * calc(1 - var(--tw-space-y-reverse))) !important; }
+            .glow-sm { width: 160px !important; height: 160px !important; }
+            .cta-py-resp { padding-top: 48px !important; padding-bottom: 48px !important; }
+            .features-main-img { margin-top: 24px !important; margin-right: 0 !important; margin-bottom: 0 !important; }
+            .features-main-img img { transform: none !important; }
         }
 
-        .top-nav .logo {
-            font-size: 1.2rem; /* Adjusted font size */
-            font-weight: 800;
-            margin: 0;
-            background: linear-gradient(90deg, var(--accent1), var(--accent2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        @media (max-width: 640px) {
+            .display-hero-resp { font-size: clamp(30px, 9vw, 40px) !important; }
+            .hero-btn-row { flex-direction: column; align-items: center; }
+            .hero-btn-row > a { width: 100%; max-width: 320px; }
+            .p-responsive { padding: 24px !important; }
+            .text-display-hero { font-size: clamp(30px, 10vw, 40px) !important; }
+            .text-headline-lg { font-size: clamp(22px, 7vw, 28px) !important; }
+            .text-body-lg { font-size: 15px !important; }
+            .mb-16 { margin-bottom: 32px !important; }
+            .mb-24 { margin-bottom: 48px !important; }
         }
 
-        .top-nav .nav-links {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        /* Scroll Down Arrow */
-        .scroll-down-arrow {
-            position: absolute;
-            bottom: 90px; /* Adjust as needed */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 7;
-        }
-
-        .scroll-down-arrow a {
-            display: block;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .scroll-down-arrow a:hover {
-            background: var(--accent2);
-            border-color: var(--accent2);
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(155, 127, 255, 0.3);
-        }
-
-        .scroll-down-arrow svg {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
-    <script>
-        // Set theme on initial load
-        (function () {
-            const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-            if (theme === 'light') {
-                document.documentElement.classList.add('light-mode');
-            } else {
-                document.documentElement.classList.remove('light-mode');
-            }
-        })();
-    </script>
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <meta name="google-site-verification" content="5U-mqTYLEDw-WOVFMyJNb2YXERBgOSnvegBzYfgsFe4" />
 </head>
-<body>
-
-<div id="update-banner" style="background: linear-gradient(90deg, var(--accent1), var(--accent2)); color: var(--primary-btn-text); padding: 12px 24px; display: flex; justify-content: center; align-items: center; gap: 12px; font-weight: 600; position: relative;">
-    <span>AI Browsing Assistant has been <b>updated</b> to Release Version <b>2.0.4</b></span>
-    <button onclick="document.getElementById('update-banner').style.display='none';" style="background: rgba(0,0,0,0.2); border: none; color: inherit; cursor: pointer; padding: 4px 12px; border-radius: 6px; font-weight: 700; position: absolute; right: 24px;">✕</button>
-</div>
-
-<nav class="top-nav wrap">
-    <a href="index.html" class="logo-link">
-        <h3 class="logo"><img src="assets/logo.png" width='28' height='28'/>AI Browsing Assistant</h3>
-
-    </a>
-    <div class="nav-links">
-        <a href="index.html" class="btn btn-ghost">Home</a>
-        <a href="privacy.html" class="btn btn-ghost">Privacy Policy</a>
-
-        <button class="btn btn-ghost" id="theme-toggle" aria-label="Toggle theme">
-            <svg class="sun" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-        </button>
+<body class="font-body-md text-on-surface">
+<!-- Top Navigation -->
+<nav class="fixed w-full top-0 z-50 bg-glass-surface backdrop-blur-[20px] border-b border-glass-border shadow-sm">
+    <div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto py-4">
+        <div class="flex items-center gap-3">
+            <img alt="AI Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLunkXLhCkc4BZ9nU7qQS-hXXdojPXtJhoVQEReqcoylMY4poo73lqgU1aYMN1K6m9GywAat9TwGqUmEtajOmuXu9Snyxd0Rpc3Q4N1M77cdMR4MKUJe9B0LNi28a0ASi8dszzJtTzTEKNYya66itMCHydlsCpmvZjs3oV0ZCnJeeax2a8IITdprF-OMi-nYHRH1KSBcXQgsa0Ai54G7ekrha030VGWV_Am807lQBUK0vindR4AqiRkNYsx2"/>
+            <span class="text-headline-md font-headline-md font-extrabold text-on-surface tracking-tighter">AI Browsing Assistant.</span>
+        </div>
+        <div class="hidden md:flex gap-8 items-center">
+            <a class="font-label-mono text-label-mono text-cyber-cyan border-b-2 border-cyber-cyan pb-1" href="index.html">Overview</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface transition-colors" href="#features">Features</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface transition-colors" href="#setup">Steps</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface transition-colors" href="privacy.html">Privacy</a>
+            <a class="ml-4 px-6 py-2 bg-cyber-cyan text-on-primary font-label-mono text-label-mono rounded-lg hover:cyan-glow transition-all active:scale-95" href="https://chromewebstore.google.com/detail/ai-browsing-assistant-%E2%9C%A8/cghnhjononphgmdcamlcoeeioelbmdoa">
+                Add to Chrome
+            </a>
+        </div>
+        <!-- Mobile Menu Toggle -->
+        <button class="md:hidden text-on-surface material-symbols-outlined  border border-glass-border p-2.5 rounded-lg backdrop-blur-[20px] hover:bg-glass-surface transition-all active:scale-95" id="mobile-menu-btn" aria-label="Toggle menu">menu</button>
+        <!-- Mobile Menu Dropdown -->
+        <div class="fixed top-[73px] left-0 right-0 z-40 max-h-[50vh] bg-deep-indigo/95 backdrop-blur-xl border-b border-glass-border hidden md:hidden flex flex-col items-center gap-6 py-8 overflow-y-auto shadow-2xl" id="mobile-menu">
+            <a class="font-label-mono text-label-mono text-cyber-cyan border-b-2 border-cyber-cyan pb-1" href="index.html">Overview</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface transition-colors" href="#features">Features</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface transition-colors" href="#setup">Steps</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface transition-colors" href="privacy.html">Privacy</a>
+            <a class="px-6 py-3 bg-cyber-cyan text-on-primary font-label-mono text-label-mono rounded-lg hover:cyan-glow transition-all active:scale-95" href="https://chromewebstore.google.com/detail/ai-browsing-assistant-%E2%9C%A8/cghnhjononphgmdcamlcoeeioelbmdoa">
+                Add to Chrome
+            </a>
+        </div>
     </div>
 </nav>
-
-<header class="hero" id="home">
-    <div class="parallax-layer" data-speed="0.06">
-        <div class="layer-inner bg-grid"></div>
+<!-- Hero Section -->
+<header class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Parallax Background -->
+    <div class="absolute inset-0 z-0" id="hero-parallax">
+        <img alt="Spatial AI background" class="w-full h-full object-cover parallax-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTmAD4E7RyNhiAWJTzJAePx7q7AmdUMIceNN6-DSWbG0OUr_spOVdGlu2yK5qygv3E4lohKjKEoaioxCFM6tbCsCZhSZKlVUultZvmN8aRqUFFdbntjRIgUPwfWV-mi_342AM0TvP-PzDqHxAeCMupvHzSswF4R7iEnWUIRh7GKHLZgxXLt8UpnXyDjWhXqk4JBEKvoCtITayEIMymlf7fi9DKlIhP1IhroPmyG63pDkFGJNbsZwPV2_RjR1_GhupvhwOni1lLKLCY"/>
+        <div class="absolute inset-0 bg-deep-indigo/40 backdrop-blur-[2px]"></div>
     </div>
-    <div class="parallax-layer" data-speed="0.14">
-        <div class="layer-inner bg-orb"></div>
-    </div>
-    <div class="parallax-layer" data-speed="0.28">
-        <div class="layer-inner bg-circuit"></div>
-    </div>
-
-    <div class="hero-inner wrap">
-        <div>
-            <h1 class="title"><img src="assets/logo.png" width='48' height='48'/>AI Browsing Assistant</h1>
-            <p class="subtitle">Intelligent Browsing for Students, Researchers, and Programmers.</p>
-            <p class="tagline">Bring the most advanced AI directly into your browser. Enhance productivity,
-                accelerate research, and get context-aware assistance across the web.</p>
-
-            <div class="cta-row">
-                <a class="btn btn-primary"
-                   href="https://chromewebstore.google.com/detail/cghnhjononphgmdcamlcoeeioelbmdoa" id="downloadBtn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                        <path d="M12 3v12" stroke="#071023" stroke-width="1.6" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                        <path d="M8 11l4 4 4-4" stroke="#071023" stroke-width="1.6" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                        <path d="M21 21H3" stroke="#071023" stroke-width="1.6" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                    </svg>
+    <!-- Atmospheric Glows -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 glow-sm bg-cyber-cyan/20 rounded-full blur-[120px] floating-element"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 glow-sm bg-electric-purple/20 rounded-full blur-[120px] floating-element" style="animation-delay: -3s"></div>
+    <div class="relative z-10 max-w-container-max mx-auto px-gutter text-center">
+        <div class="fade-up">
+<span class="inline-block mb-6 px-4 py-1.5 rounded-full border border-cyber-cyan/30 bg-cyber-cyan/10 text-cyber-cyan font-label-mono text-label-mono">
+                    Release Version 2.0.4 Updated ✕
+                </span>
+            <h1 class="font-display-hero text-display-hero text-white mb-6">
+                Intelligence <br/> <span class="text-cyber-cyan">in Browser</span>
+            </h1>
+            <p class="font-body-lg body-lg-resp max-w-2xl mx-auto text-on-surface-variant mb-12">
+                Bring the most advanced AI directly into your browser. Enhance productivity, accelerate research, and get context-aware assistance across the web.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6 hero-btn-row">
+                <a class="px-8 py-4 bg-cyber-cyan text-on-primary font-headline-md headline-md-resp rounded-xl hover:cyan-glow transition-all active:scale-95 flex items-center justify-center gap-2" href="https://chromewebstore.google.com/detail/ai-browsing-assistant-%E2%9C%A8/cghnhjononphgmdcamlcoeeioelbmdoa">
                     Add to Chrome™
+                    <span class="material-symbols-outlined">open_in_new</span>
                 </a>
-                <button class="btn btn-ghost" id="learnBtn">Learn more</button>
+                <a class="px-8 py-4 glass-card rounded-xl font-headline-md headline-md-resp border border-electric-purple text-electric-purple flex items-center justify-center gap-2" href="#features">
+                    Learn more
+                </a>
             </div>
         </div>
-
-        <aside class="card-right reveal">
-            <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
-                <div class="dot"></div>
-                <div style="flex:1">
-                    <h4 style="margin:0">Fast Contextual Answers</h4>
-                    <p class="muted">Generate summaries, ask about page content, and extract structured insights
-                        instantly.</p>
-                </div>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:14px;align-items:center">
-                <img src="assets/logo.png" style="width: inherit;" width='48' height='48'/>
-                <strong>Powered by AI</strong>  <!-- Gemini™ -->
-                <div class="muted" style="font-size:13px">Context-aware browsing assistant</div>
-            </div>
     </div>
-    </aside>
-    </div>
-
-    <div class="scroll-down-arrow">
-        <a href="#setup" aria-label="Scroll to setup section">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down">
-                <polyline points="12 5 12 19"></polyline>
-                <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
-        </a>
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+        <span class="material-symbols-outlined text-cyber-cyan">expand_more</span>
     </div>
 </header>
-
-<main>
-
-    <section id="setup">
-        <div class="setup-bg-shape parallax-layer-scroll" data-speed="-0.1"></div>
-
-        <div class="container wrap">
-            <p class="section-title">Get Started</p>
-            <h2 style="margin-top:6px; margin-bottom: 30px; color: white;">Set up in seconds</h2>
-
-            <div class="steps-grid">
-
-                <div class="step-card reveal">
-                    <span class="step-num">01</span>
-                    <div class="step-content">
-                        <div class="screenshot-placeholder">
-                            <img src="assets/step1.png" style="width: inherit; height: -webkit-fill-available;"/>
-                        </div>
-                        <h4>Add to Browser</h4>
-                        <p>Navigate to the Chrome Web Store and click "Add to Chrome". Then pin the extension to your
-                            toolbar for easy access.</p>
-                    </div>
-                </div>
-
-                <div class="step-card reveal" style="transition-delay: 100ms;">
-                    <span class="step-num">02</span>
-                    <div class="step-content">
-                        <div class="screenshot-placeholder">
-                            <img src="assets/step2.png" style="width: inherit; height: -webkit-fill-available;"/>
-                        </div>
-                        <h4>Activate the Mic 🎙️</h4>
-                        <p>Navigate to Extensions Settings, and click on "Details" under AI Browsing Assistant ✨, and
-                            choose 'Site settings' , scroll to Microphone and select 'Allow'. This way you can activate
-                            Speech to Text.</p>
-                    </div>
-                </div>
-
-                <div class="step-card reveal" style="transition-delay: 200ms;">
-                    <span class="step-num">03</span>
-                    <div class="step-content">
-                        <div class="screenshot-placeholder">
-                            <img src="assets/step3.png" style="width: inherit; height: -webkit-fill-available;"/>
-                        </div>
-                        <h4>Sign In</h4>
-                        <p>Authenticate to Gemini with your Google account through the automatic pop-up page.</p>
-                    </div>
-                </div>
-
-                <div class="step-card reveal" style="transition-delay: 200ms;">
-                    <span class="step-num">04</span>
-                    <div class="step-content">
-                        <div class="screenshot-placeholder">
-                            <img src="assets/step4.png" style="width: inherit; height: -webkit-fill-available;"/>
-                        </div>
-                        <h4>Enjoy chatting!</h4>
-                        <p>Now you have your own personal Browsing AI Assistang that sees what you see and you can ask
-                            it about the pages you are visiting.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="overview">
-        <div class="container wrap">
-            <p class="section-title">Overview</p>
-            <h2 style="margin-top:6px">A smarter way to browse</h2>
-            <p class="muted" style="max-width:900px">AI Browsing Assistant unlocks the capabilities of Google’s advanced
-                AI system directly inside your browser. Enhance productivity, accelerate research, and get intelligent,
-                context-aware assistance anywhere you go online.</p>
-        </div>
-    </section>
-
-    <section id="features">
-        <div class="container wrap">
-            <p class="section-title">Features</p>
-            <h3 style="margin-top:6px">Intelligent Assistance</h3>
-            <div class="features" style="margin-top:18px">
-
-                <div class="feature-card reveal">
-                    <h3>Smart Page Analysis</h3>
-                    <p>Generate concise, reliable summaries; ask questions about on-page content; extract key insights
-                        and structured summaries fast.</p>
-                </div>
-
-                <div class="feature-card reveal">
-                    <h3>Natural Conversations</h3>
-                    <p>Fluid, context-preserving interactions that adapt to technical or casual topics and maintain
-                        conversation context across tasks.</p>
-                </div>
-
-                <div class="feature-card reveal">
-                    <h3>Enhanced Productivity</h3>
-                    <p>Draft content, generate ideas, receive immediate feedback, and accelerate coding, planning, and
-                        writing workflows.</p>
-                </div>
-
-                <div class="feature-card reveal">
-                    <h3>Learning & Discovery</h3>
-                    <p>Clear explanations, guided support for new subjects, and organized, verifiable research help.</p>
-                </div>
-
-                <div class="feature-card reveal">
-                    <h3>Multilingual Support</h3>
-                    <p>Translate content, communicate across languages, and get culturally informed responses in real
-                        time.</p>
-                </div>
-
-                <div class="feature-card reveal">
-                    <h3>Privacy & Security</h3>
-                    <p>Designed with strong privacy protections and secure processing at its core.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="who" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);">
-        <div class="container wrap">
-            <p class="section-title">Who it's for</p>
-            <h3 style="margin-top:6px">Ideal for Students, Professionals, Creators</h3>
-            <div class="who-grid" style="margin-top:18px">
-                <div class="who-box reveal">
-                    <h4>Students</h4>
-                    <p class="muted">Learning assistance, summarization, and study preparation.</p>
-                </div>
-                <div class="who-box reveal">
-                    <h4>Professionals</h4>
-                    <p class="muted">Advanced writing, research acceleration, file analysis and < Coding! /> </p>
-                </div>
-                <div class="who-box reveal">
-                    <h4>Creators</h4>
-                    <p class="muted">Idea generation, content refinement, and inspiration.</p>
-                </div>
-                <div class="who-box reveal">
-                    <h4>Everyday Users</h4>
-                    <p class="muted">Quick answers, translation, and enhanced browsing.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="tech">
-        <div class="container wrap">
-            <p class="section-title">Technology</p>
-            <h3 style="margin-top:6px">Powered by AI</h3> <!-- Gemini™ -->
-            <p class="muted" style="max-width:900px">Advanced natural language understanding, modern machine learning,
-                and low-latency responses integrate seamlessly with Chrome.</p>
-            <div style="margin-top:20px;display:flex;gap:14px;flex-wrap:wrap">
-                <div class="feature-card reveal" style="min-width:220px;flex:1"><h3>Low-Latency</h3>
-                    <p class="muted">Fast replies for real-time browsing assistance.</p></div>
-                <div class="feature-card reveal" style="min-width:220px;flex:1"><h3>File Understanding</h3>
-                    <p class="muted">Analyze documents, PDFs, and images (coming soon).</p></div>
-                <div class="feature-card reveal" style="min-width:220px;flex:1"><h3>Context Awareness</h3>
-                    <p class="muted">Conversations that preserve context across pages.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section style="padding-bottom:30px">
-        <div class="container wrap">
-            <div class="cta-footer reveal">
-                <div>
-                    <h3 style="margin:0 0 6px">Experience intelligent browsing</h3>
-                    <p class="muted" style="margin:0">Install now and transform your daily workflow.</p>
-                </div>
-                <div>
-                    <a class="btn btn-primary"
-                       href="https://chromewebstore.google.com/detail/cghnhjononphgmdcamlcoeeioelbmdoa"
-                       id="downloadBtnFooter">Install AI Browsing Assistant ✨</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-
-</main>
-
-<footer>
-    <div style="padding: 1%;">
-        <div style="padding: 1%;">
-            <span>Protecting your privacy with Highest Industry Standard Security</span>
-        </div>
-        <img src="assets/gdpr.png" width="5%" />
-        <img src="assets/soc.png" width="5%" />
-        <img src="assets/iso27001.png" width="5%" />
+<!-- Features Bento Grid -->
+<section class="py-section-gap section-gap-resp px-gutter max-w-container-max mx-auto relative" id="features">
+    <div class="text-center mb-16 fade-up">
+        <span class="font-label-mono text-label-mono text-electric-purple uppercase tracking-widest mb-4 block">Capabilities</span>
+        <h2 class="font-headline-lg text-headline-lg text-white mb-4">A smarter way to browse</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
+            AI Browsing Assistant unlocks the capabilities of Google’s advanced AI system directly inside your browser.
+        </p>
     </div>
-    <!-- Gemini™ -->
-    © <span id="year"></span> AI Browsing Assistant: Powered by AI  — Built for better browsing. <a href="privacy.html" style="color:var(--muted); text-decoration: none;">Privacy Policy</a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Main Feature Card -->
+        <div class="md:col-span-2 glass-card rounded-3xl p-responsive md:p-10 flex flex-col justify-between overflow-hidden relative fade-up">
+            <div>
+                <div class="w-12 h-12 bg-cyber-cyan/10 rounded-xl flex items-center justify-center mb-8">
+                    <span class="material-symbols-outlined text-cyber-cyan" data-weight="fill">auto_awesome</span>
+                </div>
+                <h3 class="font-headline-lg text-headline-lg text-white mb-4">Intelligent Assistance</h3>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Fluid, context-preserving interactions that adapt to technical or casual topics and maintain conversation context across tasks.
+                </p>
+            </div>
+            <div class="mt-12 -mb-20 -mr-20 features-main-img">
+                <img alt="UI Preview" class="rounded-2xl shadow-2xl rotate-3 scale-90 md:scale-90" src="/assets/step4.png"/>
+            </div>
+        </div>
+        <!-- Side Cards -->
+        <div class="glass-card rounded-3xl p-responsive md:p-8 flex flex-col fade-up" style="transition-delay: 0.2s">
+            <div class="w-10 h-10 bg-electric-purple/10 rounded-lg flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-electric-purple">analytics</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-white mb-4">Smart Page Analysis</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+                Generate concise, reliable summaries; ask questions about on-page content; extract key insights and structured summaries fast.
+            </p>
+        </div>
+        <div class="glass-card rounded-3xl p-responsive md:p-8 flex flex-col fade-up" style="transition-delay: 0.3s">
+            <div class="w-10 h-10 bg-cyber-cyan/10 rounded-lg flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-cyber-cyan">forum</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-white mb-4">Natural Conversations</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+                Talk naturally. Get explanations for complex topics or debug code with a partner that sees what you see.
+            </p>
+        </div>
+        <!-- Small Detail Cards -->
+        <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="glass-card p-6 rounded-2xl fade-up">
+                <h4 class="font-label-mono text-label-mono text-cyber-cyan mb-2">Multilingual</h4>
+                <p class="text-body-md opacity-70">Translate and explain content across any language in real time.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl fade-up" style="transition-delay: 0.1s">
+                <h4 class="font-label-mono text-label-mono text-cyber-cyan mb-2">Low-Latency</h4>
+                <p class="text-body-md opacity-70">Lightning fast replies powered by modern machine learning.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl fade-up" style="transition-delay: 0.2s">
+                <h4 class="font-label-mono text-label-mono text-cyber-cyan mb-2">Privacy Focus</h4>
+                <p class="text-body-md opacity-70">Secure processing and strong privacy protections at its core.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl fade-up" style="transition-delay: 0.3s">
+                <h4 class="font-label-mono text-label-mono text-cyber-cyan mb-2">File Support</h4>
+                <p class="text-body-md opacity-70">Analyze PDFs, documents, and images coming soon.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Setup Steps Section -->
+<section class="py-section-gap section-gap-resp relative bg-surface-container-lowest/30 overflow-hidden" id="setup">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,#00F0FF_0%,transparent_70%)] blur-[120px]"></div>
+    </div>
+    <div class="max-w-container-max mx-auto px-gutter relative">
+        <div class="text-center mb-24 fade-up">
+            <h2 class="font-headline-lg text-headline-lg text-white mb-4">Set up in seconds</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Three simple steps to transform your browser.</p>
+        </div>
+        <div class="space-y-32 space-y-resp">
+            <!-- Step 1 -->
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 fade-up">
+                <div class="flex-1">
+                    <div class="font-display-hero text-6xl md:text-8xl text-white/5 font-black mb-4">01</div>
+                    <h3 class="font-headline-lg text-headline-lg text-white mb-6">Add to Browser</h3>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                        Navigate to the Chrome Web Store and click "Add to Chrome". Then pin the extension to your toolbar for easy access.
+                    </p>
+                    <a class="inline-flex items-center gap-2 text-cyber-cyan font-label-mono group" href="https://chromewebstore.google.com/detail/ai-browsing-assistant-%E2%9C%A8/cghnhjononphgmdcamlcoeeioelbmdoa">
+                        Web Store Link <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="flex-1 glass-card p-4 rounded-3xl rotate-1">
+                    <img alt="Step 1 Preview" class="rounded-2xl w-full" src="/assets/step1.png"/>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 fade-up">
+                <div class="flex-1">
+                    <div class="font-display-hero text-6xl md:text-8xl text-white/5 font-black mb-4">02</div>
+                    <h3 class="font-headline-lg text-headline-lg text-white mb-6">Activate the Mic 🎙️</h3>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                        Navigate to Extensions Settings, click on "Details" under AI Browsing Assistant ✨, choose 'Site settings', and select 'Allow' for Microphone access.
+                    </p>
+                </div>
+                <div class="flex-1 glass-card p-4 rounded-3xl -rotate-1">
+                    <img alt="Step 2 Preview" class="rounded-2xl w-full" src="/assets/step2.png"/>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 fade-up">
+                <div class="flex-1">
+                    <div class="font-display-hero text-6xl md:text-8xl text-white/5 font-black mb-4">03</div>
+                    <h3 class="font-headline-lg text-headline-lg text-white mb-6">Sign In &amp; Go</h3>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                        Authenticate with your Google account through the automatic pop-up page. Your own personal AI assistant is now ready.
+                    </p>
+                </div>
+                <div class="flex-1 glass-card p-4 rounded-3xl rotate-1">
+                    <img alt="Step 3 Preview" class="rounded-2xl w-full" src="/assets/step3.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-gap section-gap-resp px-gutter text-center relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-electric-purple/10 blur-[150px] rounded-full"></div>
+    </div>
+    <div class="relative z-10 glass-card max-w-4xl mx-auto cta-py-resp px-6 md:px-8 rounded-[40px] border-cyber-cyan/20 fade-up">
+        <span class="material-symbols-outlined text-6xl text-cyber-cyan sparkle-pulse mb-8" data-weight="fill">auto_awesome</span>
+        <h2 class="font-display-hero text-display-hero text-white mb-8">Experience intelligent browsing</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto">
+            Join thousands of students and professionals who have transformed their research workflows.
+        </p>
+        <a class="inline-flex items-center gap-4 px-6 md:px-10 py-4 md:py-5 bg-cyber-cyan text-on-primary font-headline-md headline-md-resp rounded-2xl hover:cyan-glow transition-all active:scale-95 group" href="https://chromewebstore.google.com/detail/ai-browsing-assistant-%E2%9C%A8/cghnhjononphgmdcamlcoeeioelbmdoa" target="_blank">
+            Install AI Browsing Assistant ✨
+        </a>
+        <p class="mt-8 text-on-surface-variant/60 font-label-mono text-label-mono flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-sm">verified_user</span>
+            Highest Industry Standard Security
+        </p>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-section-gap section-gap-resp bg-surface-container-lowest border-t border-glass-border">
+    <div class="flex flex-col md:flex-row justify-between items-start w-full px-gutter max-w-container-max mx-auto gap-stack-lg">
+        <div class="flex flex-col gap-4 w-full md:w-auto">
+            <div class="flex items-center gap-3">
+                <img alt="Aether AI Logo" class="w-8 h-8 opacity-80 shrink-0" src="https://lh3.googleusercontent.com/aida/AP1WRLunkXLhCkc4BZ9nU7qQS-hXXdojPXtJhoVQEReqcoylMY4poo73lqgU1aYMN1K6m9GywAat9TwGqUmEtajOmuXu9Snyxd0Rpc3Q4N1M77cdMR4MKUJe9B0LNi28a0ASi8dszzJtTzTEKNYya66itMCHydlsCpmvZjs3oV0ZCnJeeax2a8IITdprF-OMi-nYHRH1KSBcXQgsa0Ai54G7ekrha030VGWV_Am807lQBUK0vindR4AqiRkNYsx2"/>
+                <span class="font-headline-md headline-md-resp text-on-surface opacity-80">AI Browsing Assistant</span>
+            </div>
+            <p class="font-body-md body-md-resp text-on-surface-variant max-w-xs">
+                © 2024 AI Browsing Assistant. Intelligence in Flight. Built for better browsing.
+            </p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 md:gap-x-12 gap-y-4 w-full md:w-auto">
+            <div class="flex flex-col gap-2">
+                <span class="font-label-mono text-label-mono text-cyber-cyan mb-2">Product</span>
+                <a class="text-on-surface-variant hover:text-cyber-cyan transition-colors" href="#setup">Setup</a>
+                <a class="text-on-surface-variant hover:text-cyber-cyan transition-colors" href="#features">Features</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="font-label-mono text-label-mono text-cyber-cyan mb-2">Company</span>
+                <a class="text-on-surface-variant hover:text-cyber-cyan transition-colors" href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="font-label-mono text-label-mono text-cyber-cyan mb-2">Support</span>
+                <a class="text-on-surface-variant hover:text-cyber-cyan transition-colors" href="https://chromewebstore.google.com/detail/ai-browsing-assistant-%E2%9C%A8/cghnhjononphgmdcamlcoeeioelbmdoa" target="_blank">Google Chrome Store</a>
+            </div>
+        </div>
+    </div>
 </footer>
-
-<button class="back-to-top" id="backToTop" aria-label="Back to Top">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-         stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 15l-6-6-6 6"/>
-    </svg>
-</button>
-
 <script>
-    // Inline JavaScript
-    // ---------------------------
-    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-    // 1. Hero Parallax (Mouse/Scroll based for Hero)
-    (function setupHeroParallax() {
-        const layers = Array.from(document.querySelectorAll('.hero .parallax-layer'));
-        layers.forEach(l => l._speed = parseFloat(l.dataset.speed) || 0.1);
-
-        function onScroll() {
-            const sc = window.scrollY;
-            // Only animate if near hero
-            if (sc > window.innerHeight) return;
-            layers.forEach(layer => {
-                const offset = sc * layer._speed;
-                layer.style.transform = `translate3d(0, ${offset}px, 0)`;
-            });
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        function closeMenu() {
+            mobileMenu.classList.add('hidden');
+            menuBtn.textContent = 'menu';
         }
-
-        window.addEventListener('scroll', onScroll, {passive: true});
-    })();
-
-    // 2. Section Scroll Parallax (For the Setup section background shape)
-    (function setupSectionParallax() {
-        const shapes = document.querySelectorAll('.parallax-layer-scroll');
-        window.addEventListener('scroll', () => {
-            const sc = window.scrollY;
-            shapes.forEach(shape => {
-                const speed = parseFloat(shape.dataset.speed) || 0.1;
-                // Calculate offset relative to viewport
-                const rect = shape.parentElement.getBoundingClientRect();
-                // if visible
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    const yPos = (window.innerHeight - rect.top) * speed;
-                    shape.style.transform = `translate3d(0, ${yPos}px, 0)`;
-                }
-            });
-        }, {passive: true});
-    })();
-
-    // 3. Reveal Animations
-    (function setupReveal() {
-        const opts = {root: null, rootMargin: '-8% 0px', threshold: 0.1};
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(en => {
-                if (en.isIntersecting) {
-                    en.target.classList.add('visible');
-                    io.unobserve(en.target)
-                }
-            })
-        }, opts);
-        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    })();
-
-    // 4. Smooth Scroll for links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            e.preventDefault();
-            const t = document.querySelector(a.getAttribute('href'));
-            if (t) t.scrollIntoView({behavior: 'smooth', block: 'start'});
-        })
-    });
-
-    // 5. Back to Top Logic
-    const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 600) btt.classList.add('show');
-        else btt.classList.remove('show');
-    });
-    btt.addEventListener('click', () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    });
-
-    // Learn Btn Logic
-    document.getElementById('learnBtn').addEventListener('click', () => {
-        const t = document.getElementById('setup');
-        t.scrollIntoView({behavior: 'smooth', block: 'start'});
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 6. Theme Toggle Logic
-    (function setupThemeToggle() {
-        const toggle = document.getElementById('theme-toggle');
-        const docEl = document.documentElement;
-
-        function updateToggleIcon() {
-            const isLight = docEl.classList.contains('light-mode');
-            toggle.querySelector('.moon').style.display = isLight ? 'block' : 'none';
-            toggle.querySelector('.sun').style.display = isLight ? 'none' : 'block';
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.textContent = 'close';
+            }
         }
-
-        toggle.addEventListener('click', () => {
-            docEl.classList.toggle('light-mode');
-            const newTheme = docEl.classList.contains('light-mode') ? 'light' : 'dark';
-            localStorage.setItem('theme', newTheme);
-            updateToggleIcon();
+        menuBtn.addEventListener('click', toggleMenu);
+        // Close on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
+        // Close on backdrop click (clicking the menu itself but not a link)
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) closeMenu();
+        });
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) closeMenu();
+        });
+    }
 
-        // Set initial icon state on full load
-        updateToggleIcon();
-    })();
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Simple Parallax Effect for Hero
+    window.addEventListener('scroll', () => {
+        const scroll = window.pageYOffset;
+        const heroBg = document.querySelector('.parallax-bg');
+        if (heroBg) {
+            heroBg.style.transform = `translateY(${scroll * 0.4}px) scale(${1 + scroll * 0.0005})`;
+        }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 </script>
-</body>
-</html>
+</body></html>

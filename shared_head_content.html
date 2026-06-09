@@ -366,10 +366,25 @@
     }
 
     @media (max-width: 640px) {
-        .who-grid {
-            grid-template-columns: 1fr;
+            .who-grid {
+                grid-template-columns: 1fr;
+            }
         }
-    }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2rem !important; }
+            .hero { min-height: 60vh; padding: 60px 16px 80px; }
+            .bg-orb { width: 400px !important; height: 400px !important; }
+            .bg-circuit { width: 100% !important; height: 200px !important; }
+            section { padding: 48px 0; }
+            .top-nav { flex-wrap: wrap; gap: 8px; }
+            .top-nav .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+            .btn { padding: 10px 14px; font-size: 13px; }
+            .wrap { padding: 20px 16px; }
+        }
+        @media (max-width: 480px) {
+            .title { font-size: 1.6rem !important; }
+        }
 
     .feature-card, .who-box {
         background: linear-gradient(180deg, var(--glass-bg), transparent);
