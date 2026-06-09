@@ -230,6 +230,23 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+        @media (max-width: 768px) {
+            .top-nav { flex-wrap: wrap; gap: 8px; }
+            .top-nav .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+            .btn { padding: 10px 14px; font-size: 13px; }
+            .failed-title { font-size: 1.8rem; }
+            .failed-icon { width: 72px; height: 72px; }
+            .failed-icon svg { width: 36px; height: 36px; }
+            .failed-message { font-size: 1rem; }
+            .error-details { padding: 16px; }
+            .wrap { padding: 20px 16px; }
+            footer img { width: 15% !important; min-width: 50px; }
+        }
+        @media (max-width: 480px) {
+            .failed-title { font-size: 1.4rem; }
+            .button-group { flex-direction: column; align-items: center; }
+            .button-group .btn { width: 100%; max-width: 280px; }
+        }
     </style>
     <script>
         (function () {
